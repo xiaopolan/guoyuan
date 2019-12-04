@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8"  data-res="trust">
+    <meta content="telephone=no" name="format-detection"  data-res="trust">
+    <meta name="renderer" content="webkit"  data-res="trust">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"  data-res="trust">
+		<!-- <meta http-equiv="Content-Security-Policy"
+          content="default-src *; frame-src 'self' style-src 'self' http://*.trust.com https://*.trust.com 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://*.trust.com https://*.trust.com;"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"  data-res="trust">
+		<!-- <meta http-equiv="X-Frame-Options" content="DENY"> -->
+    <link rel="icon" href="<%= BASE_URL %>favicon.png"  data-res="trust">
+    <!-- <link rel="stylesheet" href="https://unpkg.com/iview@2.7.2/dist/styles/iview.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/iview@3.2.2/dist/styles/iview.css" data-res="trust">
+   <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.min.js"></script> -->
+	<!-- <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script> -->
+	<script src="https://cdn.bootcss.com/vue/2.6.10/vue.min.js" data-res="trust"></script>
+	
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js" data-res="trust"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" data-res="trust"></script>
+    <!-- <script src="https://unpkg.com/iview@2.7.2/dist/iview.min.js"></script> -->
+    <script src="https://unpkg.com/iview@3.2.2/dist/iview.min.js" data-res="trust"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts-en.common.js" data-res="trust"></script>
+		<script type="text/javascript"  data-res="trust">
+		　　document.documentElement.style.fontSize = document.documentElement.clientWidth / 375*100 + 'px';
+				(function (window) {
+						if (window.location !== window.top.location) {
+								window.top.location = window.location;
+						}
+				})(this);
+		</script>
+		
+    <title data-res="trust">小牛趣拍</title>
+</head>
+
+<style type="text/css" data-res="trust"> 
+    iframe{ v:expression(this.src='about:blank',this.outerHTML='');} 
+</style>
+<!-- ondrop：在一个拖动过程中，释放鼠标键时触发此事件，ondragover：当某被拖动的对象在另一对象容器范围内拖动时触发此事件 -->
+<body ondrop="return false" ondragover="return false" color="#ffffff" >
+    <!-- vue容器 -->
+    <div id="app" data-res="trust"></div>
+    <script  data-res="trust"> 
+			 if(top.location!=self.location)top.location=self.location;
+        // 为网站做一个标记：实现方法是为window添加一个App属性
+        (function (W) {
+            var t = new Date();
+            t.setHours(t.getHours() + 8);
+            // 为window添加一个App属性
+            W.App = {
+                version: {
+                    id: '开发测试版',
+                    // 格式化当前时间：2018-12-04 11:54:44
+                    time: t.toISOString().replace(/\..*$/, '').replace('T', ' ')
+                }
+            };
+        })(window);
+				//以下代码为删除嵌入广告
+				var del_times = 0, deTimer = null;
+				function adGo() {
+						var iframe = document.getElementsByTagName('iframe')[0];
+						if(iframe){
+								console.log(iframe)
+								
+								//循环 iframe 父类，直到找到body和body的下一级，然后整个嵌入的代码删除。
+								var bodyNode = {tagName:''}, iframeParent, targetNode = iframe.parentNode;
+								while (bodyNode.tagName != 'BODY'){
+										bodyNode = targetNode;
+										if(bodyNode.tagName != 'BODY'){
+												iframeParent = targetNode;
+												targetNode = targetNode.parentNode;
+										}
+								}
+								if(iframeParent) //如果iframe有父类
+										bodyNode.removeChild(iframeParent);
+								else
+										bodyNode.removeChild(iframe);
+						}
+						del_times++;
+						if (del_times > 10) window.clearInterval(deTimer)
+				}
+				deTimer = self.setInterval(adGo, 200);   //把这个1000, 调低一点，比如200
+    </script>
+		
+</body>
+
+</html>

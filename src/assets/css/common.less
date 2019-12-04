@@ -1,0 +1,216 @@
+/* 公共样式 */
+
+// 头部相关样式
+.layout_header {
+    .time_chose,
+    .hz_Price {
+        margin-top: 7px;
+    }
+}
+// 主体相关样式
+.layout_content {
+    .bigItemBox{
+        margin-bottom: 20px;
+        .leftItemBox, .rightItemBox{
+            width: 49%;
+            background: #fff;
+            border-radius: 5px;
+            .tablepage_box{
+                padding: 0px 40px ;
+                .pageBox{
+                    .ivu-page.mini .ivu-page-item{
+                        min-width: 20px;
+                    }
+                    .ivu-page-item-jump-next, .ivu-page-item-jump-prev, .ivu-page-next, .ivu-page-prev{
+                        min-width: 24px;
+                    }
+                    .ivu-page.mini .ivu-page-options-elevator input{
+                        width: 36px;
+                        margin: 0 2px;
+                        padding: 1px 3px;
+                    }
+                    .ivu-page.mini .ivu-page-options{
+                        margin-left: 2px;
+                    }
+                    span {
+                        display: none;
+                    }
+                }
+            }
+            .time_chose {
+                text-align: left;
+                padding: 10px 0;
+                .datePicker{
+                    width: 94px;
+                }
+                >span{
+                    font-size: 12px;
+                }
+                .ivu-input-icon-normal+.ivu-input{
+                    padding-right: 20px;
+                }
+            }
+        }
+        .leftItemBox {
+            float: left;
+        }
+        .rightItemBox {
+            float: right;
+        }
+    }
+    .itemBox {
+        background: #fff;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        .divRemarks{
+            padding: 10px 40px;
+            font-size: 14px;
+            line-height: 30px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+    }
+    .remark_box {
+        padding: 15px 0;
+        font-size: 12px;
+        line-height: 30px;
+        border-bottom: 1px solid #e8e8e8;
+        h3 {
+            font-size: 16px;
+            padding-left: 40px;
+        }
+    }
+    .tablepage_box {
+        padding: 0px 40px 0px;
+        text-align: center;
+        .exportBtnBox{
+            padding: 8px 0px;
+            .exportBtn{
+                float: right;
+                .icon_export{
+                    margin-right: 4px;
+                }
+            }
+        }
+        .pageBox {
+            display: inline-block;
+            .ivu-page {
+                float: left;
+            }
+            span {
+                float: left;
+                margin-left: 15px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 14px;
+            }
+        }
+    }
+    .viewDetailModal{
+        .vertical-center-modal {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            .ivu-modal {
+                top: 0;
+            }
+        }
+    }
+}
+
+// Tabs标签页---重写样式
+.tabsBox_style > .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab{
+    border-radius: 0;
+    background: #fff;
+}
+.tabsBox_style > .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab-active{
+    border-top: 1px solid #3399ff;
+}
+.tabsBox_style > .ivu-tabs.ivu-tabs-card > .ivu-tabs-bar .ivu-tabs-tab-active:before{
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: #3399ff;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.tabsBox_style {
+    .ivu-tabs-card{
+        .ivu-tabs-bar{
+            .ivu-tabs-nav-container{
+                outline: none;
+                .ivu-tabs-nav-wrap{
+                    outline: none;
+                    .ivu-tabs-nav-scroll{
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 时间选择器相关
+.time_chose {
+    text-align: center;
+    >span {
+        margin: 0 7px;
+        color: #000;
+        font-size: 12px;
+        vertical-align: middle;
+    }
+    .span_s{
+        margin-left: 0px;
+    }
+    .datePicker {
+        width: 110px;
+    }
+    .button_search {
+        margin-left: 7px;
+    }
+    .button_reset {
+        margin-left: 7px;
+    }
+}
+
+// 自定义的表格样式
+.self_table {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    .self_thead,
+    .self_tbody,
+    .self_tr {
+        float: left;
+        width: 100%;
+    }
+    .self_thead {
+        background: #f8f8f9;
+        .self_th {
+            float: left;
+            width: 33.333%;
+            height: 40px;
+            // border: 1px solid #e9eaec;
+            // margin-left: -1px;
+            // margin-top: -1px;
+            border-left: 1px solid #e9eaec;
+            border-top: 1px solid #e9eaec;
+            border-right: 1px solid #e9eaec;
+        }
+    }
+    .self_tbody {
+        border-bottom: 1px solid #e9eaec;
+        border-right: 1px solid #e9eaec;
+        .self_td {
+            float: left;
+            width: 33.333%;
+            // border: 1px solid #e9eaec;
+            // margin-left: -1px;
+            // margin-top: -1px;
+            border-left: 1px solid #e9eaec;
+            border-top: 1px solid #e9eaec;
+        }
+    }
+}
