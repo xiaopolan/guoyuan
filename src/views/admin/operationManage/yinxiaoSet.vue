@@ -337,7 +337,7 @@
 							if (res.data == null) {
 								this.yhlbmktablePageData.list = [];
 							} else {
-								this.yhlbmktablePageData = res.data;
+								this.yhlbmktablePageData = res.data.list;
 							}
 						} else {
 							this.yhlbmktablePageData.list = [];

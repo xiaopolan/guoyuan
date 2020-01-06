@@ -267,12 +267,12 @@ const routers = [{
     },
     component: (res) => require(['./views/result.vue'], res)
 },{
-    path: '/vipdetail',
+    path: '/bannerfr',
     // 路由元信息
     meta: {
         title: '会员权益',
     },
-    component: (res) => require(['./views/vipdetail.vue'], res)
+    component: (res) => require(['./views/bannerfr.vue'], res)
 },
 {
     path: '/download',

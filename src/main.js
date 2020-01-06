@@ -104,7 +104,7 @@ axios.interceptors.response.use((response) => {
 	datas.status=response.status ||'';
 	datas.statusText=response.statusText ||'';
 	datas.fullPath=router.match(location).hash
-	if(datas.fullPath.indexOf("guide") != -1 || datas.fullPath.indexOf("register") != -1 || datas.fullPath.indexOf("vipdetail") != -1 || datas.fullPath.indexOf("result") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("judge") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("market") != -1 || datas.fullPath.indexOf("agreement") != -1 ){
+	if(datas.fullPath.indexOf("guide") != -1 || datas.fullPath.indexOf("register") != -1 || datas.fullPath.indexOf("bannerfr") != -1 || datas.fullPath.indexOf("result") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("judge") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("market") != -1 || datas.fullPath.indexOf("agreement") != -1 ){
 		//getinfo(datas)
 	}
 	return response
@@ -127,7 +127,7 @@ router.beforeEach((to, from, next) => {
 		}
 		// getinfo(datas);
 		//若没有登录信息 则返回登录页面
-		if(to.fullPath.indexOf("guide") != -1 || to.fullPath.indexOf("register") != -1 || to.fullPath.indexOf("vipdetail") != -1 || to.fullPath.indexOf("result") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("judge") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("market") != -1 || to.fullPath.indexOf("agreement") != -1 ){
+		if(to.fullPath.indexOf("guide") != -1 || to.fullPath.indexOf("register") != -1 || to.fullPath.indexOf("bannerfr") != -1 || to.fullPath.indexOf("result") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("judge") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("market") != -1 || to.fullPath.indexOf("agreement") != -1 ){
 			next();
 		}else{
 			if(objsession.permission != 0 && objsession.permission != 1){
