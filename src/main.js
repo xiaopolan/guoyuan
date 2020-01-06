@@ -105,7 +105,7 @@ axios.interceptors.response.use((response) => {
 	datas.statusText=response.statusText ||'';
 	datas.fullPath=router.match(location).hash
 	if(datas.fullPath.indexOf("guide") != -1 || datas.fullPath.indexOf("register") != -1 || datas.fullPath.indexOf("vipdetail") != -1 || datas.fullPath.indexOf("result") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("judge") != -1 || datas.fullPath.indexOf("download") != -1 || datas.fullPath.indexOf("market") != -1 || datas.fullPath.indexOf("agreement") != -1 ){
-		getinfo(datas)
+		//getinfo(datas)
 	}
 	return response
 }, function (error) {
@@ -122,7 +122,7 @@ router.beforeEach((to, from, next) => {
 			var objsession=JSON.parse(sessionStorage.getItem('objStr'))
 		}else{
 			var objsession={
-					permissionSign:2
+					permission:2
 				}
 		}
 		// getinfo(datas);
@@ -130,7 +130,7 @@ router.beforeEach((to, from, next) => {
 		if(to.fullPath.indexOf("guide") != -1 || to.fullPath.indexOf("register") != -1 || to.fullPath.indexOf("vipdetail") != -1 || to.fullPath.indexOf("result") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("judge") != -1 || to.fullPath.indexOf("download") != -1 || to.fullPath.indexOf("market") != -1 || to.fullPath.indexOf("agreement") != -1 ){
 			next();
 		}else{
-			if(objsession.permissionSign != 0 && objsession.permissionSign != 1){
+			if(objsession.permission != 0 && objsession.permission != 1){
 				if(to.path === '/login'){
 					next()
 				}else{

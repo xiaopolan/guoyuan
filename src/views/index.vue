@@ -102,7 +102,7 @@ body {
             <Sider class="layout_left" :width="menuWidth">
                 <!-- logo -->
                 <div class="logo">
-                    <h1>小牛趣拍后台系统</h1>
+                    <h1>果园魔术师</h1>
                 </div>
                 <!-- 
                     Menu：导航菜单。为页面和功能提供导航的菜单列表，常用于网站顶部和左侧 
@@ -276,7 +276,7 @@ export default {
             var objsession = JSON.parse(sessionStorage.getItem('objStr'));
             var proid;
             if (objsession) {
-                proid = objsession.permissionSign;
+                proid = objsession.permission;
             }
             this.menus = getMenus('admin', proid);
 

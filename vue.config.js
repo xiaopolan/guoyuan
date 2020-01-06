@@ -1,3 +1,4 @@
+var targeturl="http://192.168.10.15:8081"
 // vue.config.js
 var path = require('path');
 var webpack = require('webpack');
@@ -24,9 +25,9 @@ console.log("__dirname"+__dirname)
 // var targeturl="http://192.168.10.50:8081"
 // var targeturl="http://192.168.10.37:8080"
   //亢玉涵
-	// var targeturl="http://192.168.10.49:8008"
+	var targeturl="http://192.168.10.15:8081"
 	//生产
-	var targeturl="http://auction.hz-huanshi.com"
+	// var targeturl="http://47.111.184.160:8081"
   //支付通道
 // var pay='http://www.xxsrchjc.com/Pay_Index.html'
 //测试
@@ -37,7 +38,7 @@ module.exports = {
     devServer: {
 		host:'0.0.0.0',
     	port: port, // 端口号
-    	// open: true, //配置自动启动浏览器
+    	open: true, //配置自动启动浏览器
     	// 配置跨域处理
     	proxy: {
     		'/api': {

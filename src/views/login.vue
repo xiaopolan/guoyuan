@@ -1,6 +1,6 @@
 <!-- 登录页 -->
 <style scoped>
-.loginBox {
+	.loginBox {
     height: 100%;
     background: url(../assets/img/login_bg.png) no-repeat top #26adff;
     background-size: 100% auto;
@@ -80,150 +80,149 @@
 
 </style>
 <template>
-    <div class="loginBox">
-        <!--  :style="{height: bodyHeight+'px'}" -->
-        <div class="login">
-            <!-- logo部分 -->
-            <div class="login_logo">
-                <img src="../assets/img/logoreg.png" alt>
-                <h2>小牛趣拍</h2>
-            </div>
-            <!-- 表单部分 -->
-            <div class="login_cardBox">
-                <div class="login_card">
-                    <p>登录账户</p>
-                    <!-- Form 表单： model-表单数据对象，rules-表单验证规则 -->
-                    <Form ref="form" :model="form" :rules="rule">
-                        <!-- prop：对应表单域 model 里的字段 -->
-                        <FormItem prop="user">
-                            <!-- @on-enter：Input events，按下回车键时触发 -->
-                            <Input
-                                type="text"
-                                v-model="form.user"
-                                size="large"
-                                icon="ios-person-outline"
-                                placeholder="请输入用户名"
-                                @on-enter="$refs.pwd.focus()"
-                            >
-                                
-                            </Input>
-                        </FormItem>
-                        <FormItem prop="pwd">
-                            <Input
-                                ref="pwd"
-                                type="password"
-                                v-model="form.pwd"
-                                size="large"
-                                icon="ios-locked-outline"
-                                placeholder="请输入密码"
-                                @on-enter="login"
-                            >
-                            </Input>
-                        </FormItem>
-                        <FormItem>
-                            <!-- loading：设置按钮为加载中状态  -->
-                            <Button
-                                class="btn_login"
-                                type="primary"
-                                @click="login"
-                                size="large"
-                                :loading="loading"
-								long
-                            >
-                                <span v-if="!loading">登录</span>
-                                <span v-else>登录中...</span>
-                            </Button>
-                            <!-- 登录的报错信息 -->
-                            <div class="errStr">{{errstr}}</div>
+	<div class="loginBox">
+		<!--  :style="{height: bodyHeight+'px'}" -->
+		<div class="login">
+			<!-- logo部分 -->
+			<div class="login_logo">
+				<img src="../../public/favicon.png" alt>
+				<h2>果园魔术师</h2>
+			</div>
+			<!-- 表单部分 -->
+			<div class="login_cardBox">
+				<div class="login_card">
+					<p>登录账户</p>
+					<!-- Form 表单： model-表单数据对象，rules-表单验证规则 -->
+					<Form ref="form" :model="form" :rules="rule">
+						<!-- prop：对应表单域 model 里的字段 -->
+						<FormItem prop="user">
+							<!-- @on-enter：Input events，按下回车键时触发 -->
+							<Input type="text" v-model="form.user" size="large" icon="ios-person-outline" placeholder="请输入用户名" @on-enter="$refs.pwd.focus()">
 
-                        </FormItem>
-                    </Form>
-                </div>
-            </div>
-        </div>
-    </div>
+							</Input>
+						</FormItem>
+						<FormItem prop="pwd">
+							<Input ref="pwd" type="password" v-model="form.pwd" size="large" icon="ios-locked-outline" placeholder="请输入密码"
+							 @on-enter="login">
+							</Input>
+						</FormItem>
+						<FormItem>
+							<!-- loading：设置按钮为加载中状态  -->
+							<Button class="btn_login" type="primary" @click="login" size="large" :loading="loading" long>
+								<span v-if="!loading">登录</span>
+								<span v-else>登录中...</span>
+							</Button>
+							<!-- 登录的报错信息 -->
+							<div class="errStr">{{errstr}}</div>
+
+						</FormItem>
+					</Form>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 <script>
-// 引入通用的库文件
-import Util from "@/libs/util";
-import Rule from "#/libs/rule";
-import axios from 'axios'
-export default {
-    name: "login",
-    components: {},
-    data() {
-        return {
-            // 是否记住登录
-            autoLogin: false,
-            // 登录的报错信息
-            errstr: "",
-            // 登录的loading状态
-            loading: false,
-            // 表单数据对象
-            form: {
-                user: Util.user().account || "", // Util.user()：保存用户标记（本地存储）
-                pwd: ""
-            },
-            // 表单验证规则
-            rule: {
-                user: Rule("请填写用户名"),
-                pwd: Rule.pwd
-            }
-        };
-    },
-    created() {
-        // this.bodyHeight = document.body.clientHeight; // 获取屏幕高度，更新loginBox的高度
-    },
-    // activated在keep-alive组件激活时调用，当页面存在缓存的时候执行该函数
-    activated() {
-        Util.clearUser(); // 清除本地存储中的信息
-    },
-    methods: {
-        // 登录
-        login() {
-            this.errstr = "";
-            var $this = this;
-            // 表单验证
-            Rule.form(this.$refs.form, form => {
-                // 表单验证成功
-                this.loading = true; // loading开始
-                // 参数对象
-                var params = {
-                    account: $this.form.user, 
-                    pwd: $this.form.pwd ,
-										//permissionSign:0
-                };
-				let postData = this.$qs.stringify(params);
-				axios.post('/api/auction/sysUser/sys/login',postData)
-					.then( (response)=> {
-					if(response.data.code==200){
-						var res = response.data;
-						$this.loading = false;
-						sessionStorage.setItem('objStr', JSON.stringify(res.data))
-						 $this.$router.push({
-							name:'home-page',
-							params:params,
-						});
-					}else{
-						$this.loading = false;
-						Util.error("登录失败，请重新登录");
-					}
+	// 引入通用的库文件
+	import Util from "@/libs/util";
+	import Rule from "#/libs/rule";
+	import axios from 'axios'
+	export default {
+		name: "login",
+		components: {},
+		data() {
+			return {
+				// 是否记住登录
+				autoLogin: false,
+				// 登录的报错信息
+				errstr: "",
+				// 登录的loading状态
+				loading: false,
+				// 表单数据对象
+				form: {
+					user: Util.user().account || "", // Util.user()：保存用户标记（本地存储）
+					pwd: ""
+				},
+				// 表单验证规则
+				rule: {
+					user: Rule("请填写用户名"),
+					pwd: Rule.pwd
+				},
+				secretkey: ''
+			};
+		},
+		created() {
+			// this.bodyHeight = document.body.clientHeight; // 获取屏幕高度，更新loginBox的高度
+			this.getkey()
+		},
+		// activated在keep-alive组件激活时调用，当页面存在缓存的时候执行该函数
+		activated() {
+			Util.clearUser(); // 清除本地存储中的信息
+		},
+		methods: {
+			getkey() {
+				axios.get('/api/manage/user/getSecretKey')
+					.then((response) => {
+						if (response.data.code == 200) {
+							this.secretkey = response.headers.secretkey
+						} else {
+							$this.loading = false;
+							Util.error("登录失败，请重新登录");
+						}
 					})
-					.catch( (error)=> {
-					console.log(error);
+					.catch((error) => {
+						console.log(error);
 					});
-//                 console.log(params);
-// 				sessionStorage.setItem('objStr', JSON.stringify(params))
-//                //跳转到首页
-//                 setTimeout(function(){
-//                     $this.loading = false; // loading结束
-//                     $this.$router.push({
-// 						name:'home-page',
-// 						params:params,
-// 					});
-//                 },2000);
-            });
-        },
-    }
-};
+			},
+			// 登录
+			login() {
+				this.errstr = "";
+				var $this = this;
+				// 表单验证
+				Rule.form(this.$refs.form, form => {
+					// 表单验证成功
+					this.loading = true; // loading开始
+					// 参数对象
+					var params = {
+						account: $this.form.user,
+						pwd: $this.form.pwd,
+						//permissionSign:0
+					};
+					// let postData = this.$qs.stringify(params);
+					axios.post('/api/manage/user/login', params, {
+							headers: {
+								'secretkey': this.secretkey
+							}
+						})
+						.then((response) => {
+							if (response.data.code == 200) {
+								var res = response.data;
+								$this.loading = false;
+								sessionStorage.setItem('objStr', JSON.stringify(res.data))
+								$this.$router.push({
+									name: 'home-page',
+									params: params,
+								});
+							} else {
+								$this.loading = false;
+								Util.error("登录失败，请重新登录");
+							}
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+					//                 console.log(params);
+					// 				sessionStorage.setItem('objStr', JSON.stringify(params))
+					//                //跳转到首页
+					//                 setTimeout(function(){
+					//                     $this.loading = false; // loading结束
+					//                     $this.$router.push({
+					// 						name:'home-page',
+					// 						params:params,
+					// 					});
+					//                 },2000);
+				});
+			},
+		}
+	};
 </script>

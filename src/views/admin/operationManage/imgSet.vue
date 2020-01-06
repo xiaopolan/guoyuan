@@ -486,7 +486,7 @@ export default {
             let postData = this.$qs.stringify(params);
             console.log(postData);
             axios
-                .post('/api/auction/operationManage/sys/init', postData)
+                .post('/api/manage/banner/getList', postData)
                 .then(response => {
                     var res = response.data;
                     this.yhlbmktablePageData = res.data;

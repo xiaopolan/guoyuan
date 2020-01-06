@@ -5,52 +5,52 @@ var $Util = util;
 // 全部导航（特殊登录）
 const modules = {
     admin: {
-		systemManage: {
-			title: '主页',
-			icon: 'left_nav5.png',
-			list: {
-				mainManage: {
-					title: '统计图'
-				},
-				tableManage: {
-					title: '统计表'
-				},
-				developer: {
-					title: '开发者日志'
-				},
-			}
-		},
+		// systemManage: {
+		// 	title: '主页',
+		// 	icon: 'left_nav5.png',
+		// 	list: {
+		// 		mainManage: {
+		// 			title: '统计图'
+		// 		},
+		// 		tableManage: {
+		// 			title: '统计表'
+		// 		},
+		// 		developer: {
+		// 			title: '开发者日志'
+		// 		},
+		// 	}
+		// },
         operationManage: {
             title: '运营管理',
             icon: 'left_nav1.png',
             list: {
-				yunyinSet:{
+				// yunyinSet:{
+				// 	title:"运营设置"
+				// },
+				yinxiaoSet:{
 					title:"运营设置"
 				},
-				yinxiaoSet:{
-					title:"营销设置"
-				},
 				imgSet:{
-					title:"图片设置"
+					title:"banner设置"
 				},
-				messageSet:{
-					title:"消息推送"
-				},
-				vipSet:{
-					title:"会员权益"
-				},
-				giftSet:{
-					title:"礼物列表"
-				},
-				jfscale:{
-					title:"积分返利"
-				},
-				task:{
-					title:"任务列表"
-				},
-				assist:{
-					title:"帮助内容"
-				},
+				// messageSet:{
+				// 	title:"消息推送"
+				// },
+				// vipSet:{
+				// 	title:"会员权益"
+				// },
+				// giftSet:{
+				// 	title:"礼物列表"
+				// },
+				// jfscale:{
+				// 	title:"积分返利"
+				// },
+				// task:{
+				// 	title:"任务列表"
+				// },
+				// assist:{
+				// 	title:"帮助内容"
+				// },
             }
         },
         userManage: {
@@ -60,47 +60,47 @@ const modules = {
                 userList: {
                     title: '用户信息管理'
                 },
-                margin: {
-                    title: '保证金管理'
-                },
-                yueManage: {
-                    title: '余额管理'
-                },
-                jifenManage: {
-                    title: '积分管理'
+                // margin: {
+                //     title: '保证金管理'
+                // },
+                // yueManage: {
+                //     title: '余额管理'
+                // },
+                tuiguang: {
+                    title: '结算管理'
                 },
 				mingxi:{
-					title:'保证金明细'
+					title:'推广人订单'
 				},
-				xiaofei:{
-					title:'消费记录'
-				},
-				admin:{
-					title:'管理员帐号'
-				},
-				statements:{
-					title:'流水明细'
-				}
+				// xiaofei:{
+				// 	title:'消费记录'
+				// },
+				// admin:{
+				// 	title:'管理员帐号'
+				// },
+				// statements:{
+				// 	title:'流水明细'
+				// }
             }
         },
-        captureManage: {
-            title: '竞拍管理',
-            icon: 'left_nav3.png',
-            list: {
-                dangciAudit: {
-                    title: '竞拍档次管理'
-                },
-                changciAudit: {
-                    title: '竞拍场次管理'
-                },
-                zidongAudit:{
-                    title: '自动场规则管理'
-                },
-				robot:{
-				    title: '机器人管理'
-				}
-            }
-        },
+    //     captureManage: {
+    //         title: '竞拍管理',
+    //         icon: 'left_nav3.png',
+    //         list: {
+    //             dangciAudit: {
+    //                 title: '竞拍档次管理'
+    //             },
+    //             changciAudit: {
+    //                 title: '竞拍场次管理'
+    //             },
+    //             zidongAudit:{
+    //                 title: '自动场规则管理'
+    //             },
+				// robot:{
+				//     title: '机器人管理'
+				// }
+    //         }
+    //     },
         dataManage: {
             title: '商品管理',
             icon: 'left_nav4.png',
@@ -108,12 +108,12 @@ const modules = {
                 dataOverview: {
                     title: '商品管理'
                 },
-				verifyGoods: {
-					title: '商品审核'
-				},
-				classifyManage:{
-					title:'分类管理'
-				},
+				// verifyGoods: {
+				// 	title: '商品审核'
+				// },
+				// classifyManage:{
+				// 	title:'分类管理'
+				// },
                 userData: {
                     title: '订单管理'
                 },
@@ -122,18 +122,18 @@ const modules = {
 				}
             }
         },
-		tranManage: {
-		    title: '交易管理',
-		    icon: 'left_nav4.png',
-		    list: {
-				tranData: {
-					title: '交易单管理'
-				},
-				demand: {
-					title: '交易需求管理'
-				},
-		    }
-		}
+		// tranManage: {
+		//     title: '交易管理',
+		//     icon: 'left_nav4.png',
+		//     list: {
+		// 		tranData: {
+		// 			title: '交易单管理'
+		// 		},
+		// 		demand: {
+		// 			title: '交易需求管理'
+		// 		},
+		//     }
+		// }
     }
 };
 

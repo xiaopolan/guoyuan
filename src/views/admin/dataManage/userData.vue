@@ -88,9 +88,11 @@
 									>
 										<span style="color:red;">*</span>物流公司：
 									</div>
-									<select name="public-choice" v-model="logisticsCompany" class="typeselect">                                        
-										<option :value="item.name"  v-for="item in cityList" >{{item.name}}</option>                                    
-									</select>
+									<Input
+										v-model="wlgongsi"
+										placeholder="请输入物流公司"
+										style="width:150px"
+									></Input>
 								</div>
 								<div style="marginBottom:10px;textAlign:center">
 									<div
@@ -99,7 +101,7 @@
 										<span style="color:red;">*</span>物流单号：
 									</div>
 									<Input
-										v-model="logisticsNo"
+										v-model="wlid"
 										placeholder="请输入物流单号"
 										style="width:150px"
 									></Input>
@@ -111,14 +113,9 @@
                     <div class="tablepage_box">
                         <!-- 导出按钮 -->
                         <div class="exportBtnBox clearfix">
-                            <!-- <Button
-                                class="exportBtn"
-                                type="primary"
-                                size="small"
-                                @click="yhlbmkExportData"
-                            >
-                                <Icon class="icon_export" type="ios-download-outline"></Icon>导出数据
-                            </Button> -->
+                           <Button class="exportBtn" type="primary" size="small" @click="exportData(1)">
+                           		    <Icon class="icon_export" type="ios-download-outline"></Icon>导出数据
+                           		</Button>
                         </div>
                         <!-- 用户列表数据表格 -->
                         <Table
@@ -162,6 +159,8 @@ export default {
     name: "userList",
     data() {
         return {
+			wlgongsi:'',
+			wlid:'',
             yhtjtableData: [], // 用户统计表格数据
             yhlbmkIpVal: "", // 用户列表的搜索条件
             yhlbmkIsSearch: false, // 是否加入搜索词
@@ -172,44 +171,25 @@ export default {
 					key: "orderId",
                 	align: "center"
                 },
+				{
+					title: "手机号",
+					key: "mobile",
+					align: "center"
+				},
                 {
                 	title: "商品名称",
                 	key: "productName",
                 	align: "center"
                 },
-                {
-                	title: "竞拍挡次",
-                	key: "gradeName",
-                	align: "center"
-                },
 				{
-					title: "竞拍场次",
-					key: "title",
-					align: "center"
-				},
-				{
-					title: "发货时间",
-					key: "sendTime",
-					align: "center",
-					render: (h, params) => {
-						if(params.row.sendTime!=null){
-							return h(
-									'div',
-									new Date(params.row.sendTime).Format('yyyy-MM-dd hh:mm:ss')
-							); /*这里的this.row能够获取当前行的数据*/
-						}
-					}
-				},
-				{
-					title: '订单生成时间',
+					title: '创建时间',
 					key: 'createTime',
 					align: 'center',
-					render: (h, params) => {
-							return h(
-									'div',
-									new Date(params.row.createTime).Format('yyyy-MM-dd hh:mm:ss')
-							); /*这里的this.row能够获取当前行的数据*/
-					}
+				},
+				{
+					title: '支付时间',
+					key: 'payTime',
+					align: 'center',
 				},
                 {
                 	title: "成交价格",
@@ -217,48 +197,69 @@ export default {
                 	align: "center"
                 },
                 {
-                	title: "物流地址",
-                	key: "orderAddress",
+                	title: "购买数量",
+                	key: "productNumbre",
                 	align: "center"
                 },
+				{
+					title: "神秘株数量",
+					key: "limitNumber",
+					align: "center"
+				},
+				{
+					title: "快递单号",
+					key: "logisticsNumber",
+					align: "center"
+				},
+				{
+					title: "物流公司",
+					key: "logisticsCompany",
+					align: "center"
+				},
                 {
                 	title: "订单状态",
                 	key: "status",
                 	width: 90,
                 	align: "center",
 					render: (h,params)=> {
-						let text = params.row.status
+						let text = params.row.orderStatus
 						if(text==0){
-							return h('div','已发货')
+							return h('div','待支付')
 						}else if(text==1){
-							return	h(
-									"Button",
-									{
-										props: {
-											type: "warning",
-											size: "small"
-										},
-										style: {
-											// width: "70px",
-											marginLeft: "10px"
-										},
-										nativeOn: {
-											click: () => {
-												this.goorder(params)
-											}
-										}
-									},
-									"发货"
-								)
+							return h('div','交易成功')
 						}else if(text==2){
-							return h('div','代付款')
-						}else if(text==3){
-							return h('div','超时')
-						}else if(text==4){
-							return h('div','确认收货')
+							return h('div','支付失败')
+						}else if(text==-1){
+							return h('div','支付取消')
 						}
 					}
-                }
+                },
+				{
+					title: "操作",
+					key: "status",
+					width: 90,
+					align: "center",
+					render: (h, params) => {
+						return h(
+							"Button", {
+								props: {
+									type: "info",
+									size: "small"
+								},
+								style: {
+									// width: "70px",
+									marginLeft: "10px"
+								},
+								on: {
+									click: () => {
+										this.goorder(params)
+									}
+								}
+							},
+							"添加物流"
+						)
+					}
+				}
             ],
             // 用户列表表格分页数据
             yhlbmktablePageData: {
@@ -287,6 +288,7 @@ export default {
         };
     },
     created() {
+		// var json= this.$route.params.id
         // 获取用户列表数据
         this.yhlbmkGetList(1, this.yhlbmkIsSearch);
 		
@@ -304,12 +306,9 @@ export default {
             // 参数对象
             var params = {
                 pageNum: currentPage, // 当前页码
-                pageSize: 10, // 每页条数
+                pageSize: 50, // 每页条数
             };
-            console.log(params);
-            let postData = this.$qs.stringify(params);
-            console.log(postData)
-            axios.post('/api/auction/orders/sys/init',postData)
+            axios.get('/api/manage/orders/getOrders',{params})
             	.then( (response)=> {
             	var res = response.data;
             	this.yhlbmktablePageData=res.data;
@@ -336,36 +335,6 @@ export default {
 		goorder(params){
 			this.yhlbmkModal=true;
 			this.orderId=params.row.orderId
-			this.id=params.row.id
-// 			let json={
-// 				orderId:params.row.orderId
-// 			};
-// 			let postData = this.$qs.stringify(json);
-// 			axios.post('/api/auction/orders/send',postData)
-// 				.then( (response)=> {
-// 				if(response.data.code==200){
-// 					alert("发货成功");
-// 					this.yhlbmkGetList(1, this.yhlbmkIsSearch);
-// 				}else{
-// 					alert("发货失败");
-// 				}
-// 				})
-// 				.catch( (error)=> {
-// 				console.log(error);
-// 				});
-				axios.post('/api/auction/logistics/sys/getLogisticsCompany')
-					.then( (response)=> {
-					if(response.data.code==200){
-						var res = response.data;
-						this.cityList = res.data;
-						//this.yhlbmkGetList(1, this.yhlbmkIsSearch);
-					}else{
-						Util.error("接口获取失败"+response.data.msg);
-					}
-					})
-					.catch( (error)=> {
-					console.log(error);
-				});
 		},
 		queryOrder(currentPage){
 			if (this.yhlbmkIpVal) {
@@ -374,8 +343,8 @@ export default {
 					pageSize: 10, // 每页条数
 					orderId:this.yhlbmkIpVal
 				};
-				let postData = this.$qs.stringify(params);
-				axios.post('/api/auction/orders/sys/findOrderByOrderId',postData)
+				// let postData = this.$qs.stringify(params);
+				axios.get('/api/manage/orders/findOrder',{params})
 					.then( (response)=> {
 					var res = response.data;
 					this.yhlbmktablePageData=res.data;
@@ -391,26 +360,25 @@ export default {
 			
 			let json={
 				orderId:this.orderId,
-				logisticsCompany:this.logisticsCompany,
-				logisticsNo:this.logisticsNo,
-				id:this.id
+				logisticsCompany:this.wlgongsi,
+				logisticsNumber:this.wlid,
 			};
 			let postData = this.$qs.stringify(json);
-			if(this.logisticsCompany=='' || this.logisticsNo==''){
+			if(this.wlgongsi=='' || this.wlid==''){
 				Util.error("请正确填写表单");
 			}else{
-				axios.post('/api/auction/orders/sys/send',postData)
+				axios.post('/api/manage/logistics/addLogistics',postData)
 					.then( (response)=> {
 					if(response.data.code==200){
-						Util.success("发货成功");
-						this.logisticsCompany='';
-						this.logisticsNo=""
+						Util.success("添加成功");
+						this.wlgongsi='';
+						this.wlid=""
 						this.yhlbmkGetList(this.yhlbmktablePageData.pageNum, this.yhlbmkIsSearch);
 						this.$nextTick(function() {
 							this.$refs['pages'].currentPage = this.yhlbmktablePageData.pageNum;
 						});
 					}else{
-						Util.error("发货失败"+response.data.msg);
+						Util.error("添加失败"+response.data.msg);
 					}
 					})
 					.catch( (error)=> {
@@ -424,7 +392,26 @@ export default {
 					this.yhlbmkLoading = true;
 				});
 			}, 10);
-		}
+		},
+		//导出表格
+		exportData (type) {
+			if (type === 1) {
+				this.$refs.yhlbmkTable.exportCsv({
+					filename: '原始数据'
+				});
+			} else if (type === 2) {
+				this.$refs.table.exportCsv({
+					filename: '排序和过滤后的数据',
+					original: false
+				});
+			} else if (type === 3) {
+				this.$refs.table.exportCsv({
+					filename: '自定义数据',
+					columns: this.columns8.filter((col, index) => index < 4),
+					data: this.data7.filter((data, index) => index < 4)
+				});
+			}
+		} 
     }
 };
 </script>

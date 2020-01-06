@@ -11,9 +11,9 @@ body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, d
 	padding: 0;
 }
 .logo_image{
-	width:93px;
-	height:93px;
-	background: url(../assets/img/logoreg.png) no-repeat;
+	width:170px;
+	height:170px;
+	background: url(../assets/img/logo@2x.png) no-repeat;
 	background-size: 100% 100%;
 	margin: 0 auto;
 }
@@ -49,7 +49,7 @@ input::-webkit-input-placeholder{
 }
 .get_msg{
 		float: right;
-		color: #DD3138;
+		color: #00B592;
 		font-size: 13px;
 		margin-top: 20px;
 }
@@ -82,7 +82,7 @@ input::-webkit-input-placeholder{
 	width: 80%;
 	margin-left: 10%;
 	border-radius: 19px;
-	background: #DD3138;
+	background: #00B592;
 	height: 38px;
 	margin-top: 50px;
 	border: 0;
@@ -98,15 +98,15 @@ input::-webkit-input-placeholder{
 .radio_ck{
 	height: 15px;
 	width: 15px;
-	background: url(../assets/img/checked.png) no-repeat;
+	background: url(../assets/img/ic_checked@2x.png) no-repeat;
 	background-size: 100% 100%;
 	float: left;
 	margin-top: 2px;
 }
 a{
     text-decoration: none; 
-    border-bottom: 1px solid #DD3138; 
-		color:#DD3138;
+    border-bottom: 1px solid #00B592; 
+		color:#00B592;
 }
 .error{
 	color: #DD3138;
@@ -152,20 +152,13 @@ a{
 				<input class="item_input_psd" type="password" placeholder="确认密码(6-20位,包含字母和数字)" v-model="passwordagain" v-on:input="changepwdag" />
 			</div>
 			<div v-show="texterror3" class="error">两次输入不一致</div>
-			<div class='form_item'>
-				<div class='itme_icon_per'></div>
-				<input class="item_input_psd" type="text" placeholder="请输入邀请码(新用户必填)" v-model="invitate" minlength="6" maxlength="6" />
-			</div>
 		</div>
 		<div v-show="texterror4" class="errorreg">{{errmsg}}</div>
 		<div v-show="texterror5" class="errorreg">{{successmsg}}</div>
-		<div style="text-align: center;margin-top: 50px;">
-			<a :href="href">直接下载</a>
-		</div>
 		<button class="reg_btn" @click="register">注册</button>
 		<div class="btm_xieyi">
 			<p class="radio_ck"></p>
-			<router-link to='/agreement' style="float: left;font-size: 12px;margin-left: 10px;">已阅读并同意《竞拍商城用户协议》</router-link>
+			<router-link to='/agreement' style="float: left;font-size: 12px;margin-left: 5px;color: #00B592;">已阅读并同意《神秘果商城用户协议》</router-link>
 		</div>
 
 	</div>
@@ -203,33 +196,6 @@ a{
 		},
 		created() {
 			this.invitate = this.$route.query.invitationCode
-			//判断手机类型
-			var u = navigator.userAgent;
-			if (u.indexOf('Android') > -1 || u.indexOf('Linux') > -1) {
-					//安卓手机
-					this.link="android"
-			} else if (u.indexOf('iPhone') > -1) {
-					//苹果手机
-					this.link="ios"
-			} else if (u.indexOf('Windows Phone') > -1) {
-					this.link="android"
-			}
-			axios
-				.get('/api/auction/url/sys/getUrl', {
-					params:{
-						desc: this.link
-					}
-				})
-				.then(response => {
-					var res = response.data;
-					// this.yhlbmktablePageData = res.data;
-					if(res.code==200){
-						this.href=res.data
-					}
-				})
-				.catch(error => {
-					console.log(error);
-				});
 		},
 		mounted() {},
 		methods: {
@@ -260,7 +226,7 @@ a{
 				}
 			},
 			register() {
-				if (this.phone == '' || this.password == '' || this.passwordagain == '' || this.yzm == '' || this.invitate == '' ||
+				if (this.phone == '' || this.password == '' || this.passwordagain == '' || this.yzm == '' || 
 					this.texterror || this.texterror2 || this.texterror3) {
 					this.texterror4 = true
 					setTimeout(() => {
@@ -273,13 +239,13 @@ a{
 					var newcode = Base64.encode(pwdnew);
 					var params = {
 						phone: this.phone,
-						pwd: newcode,
-						shortMessageCode: this.yzm,
-						invitationCode: this.invitate,
-						regType: 2
+						password: newcode,
+						code: this.yzm,
+						channel: 3,
+						signCode:this.invitate
 					};
 					axios
-						.post('/api/auction/register/userRegister', params)
+						.post('/api/orchard/user/register', params)
 						.then(response => {
 							var res = response.data;
 							if (response.data.code == 200) {
@@ -305,9 +271,10 @@ a{
 			getsms() {
 				if (this.phone != '' && (/^1[34578]\d{9}$/.test(this.phone))) {
 					this.showcode = false
-					axios.get('/api/auction/shortMessage/sendRegCode', {
+					axios.get('/api/orchard/shortMessage/sendCode', {
 							params: {
 								phone: this.phone,
+								type:0
 							}
 						})
 						.then(response => {

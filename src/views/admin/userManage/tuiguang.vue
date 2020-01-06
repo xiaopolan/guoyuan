@@ -1,4 +1,4 @@
-<!-- 积分管理列表页 -->
+<!-- 推广人列表页 -->
 <style lang="less" scoped>
 	.yhtjBox {
     .remark_box {
@@ -35,19 +35,24 @@
 
 <template>
 	<div class="tabsBox_style">
-		<!-- 积分管理列表页 -->
+		<!-- 推广人列表页 -->
 		<div class="itemBox yhlb_table">
 			<div class="remark_box">
 				<Row>
 					<Col span="4">
-					<h3>积分管理列表</h3>
+					<h3>推广人列表</h3>
 					</Col>
 					<Col span="10" style="textAlign:center;">
 					<div class="searchBox clearfix">
 						<Input v-model="yhlbmkIpVal" size="small" placeholder="请输入电话号码" style="float:left;width: 200px">
 						</Input>
 						<Button type="error" style="float:left;width:60px;marginLeft:20px;" size="small" @click="yhlbmkSearch(1)">查询</Button>
-
+						<Button
+						    type="error"
+						    style="float:left;width:60px;marginLeft:20px;"
+						    size="small"
+						    @click="getTotal"
+						>结算</Button>
 					</div>
 					<Modal
 						v-model="upModal"
@@ -177,49 +182,28 @@
 				// 用户列表表格的标题行数据（列属性名称）
 				yhlbmkCols: [{
 						title: "用户名称",
-						key: "userName",
+						key: "nickName",
 						align: "center"
 					},
 					{
-						title: "电话号码",
-						key: "phone",
+						title: "推广人数",
+						key: "countNum",
 						align: "center"
 					},
 					{
-						title: "手续费",
-						key: "cost",
+						title: "金额",
+						key: "amount",
 						align: "center"
 					},
 					{
-						title: "积分变动",
-						key: "limitno",
+						title: "开始时间",
+						key: "startSettlingTime",
 						align: "center"
 					},
 					{
-						title: "可用积分",
-						key: "integral",
+						title: "结束时间",
+						key: "endSettlingTime",
 						align: "center"
-					},
-					{
-						title: "冻结积分",
-						key: "freezeIntegral",
-						align: "center"
-					},
-					{
-						title: "描述",
-						key: "retains",
-						align: "center"
-					},
-					{
-						title: '交易时间',
-						key: 'createTime',
-						align: 'center',
-						render: (h, params) => {
-							return h(
-								'div',
-								new Date(params.row.createTime).Format('yyyy-MM-dd hh:mm:ss')
-							); /*这里的this.row能够获取当前行的数据*/
-						}
 					},
 					{
 					    title: '操作',
@@ -227,43 +211,32 @@
 					    width: 150,
 					    align: 'center',
 					    render: (h, params) => {
+							let ids=params.row.id
 					        return h('div', [
 					            h(
-					                'Button',
-					                {
-					                    props: {
-					                        type: 'warning',
-					                        size: 'small'
-					                    },
-					                    style: {
-					                        // width: "70px",
-					                    },
-					                    on: {
-					                        click: () => {
-					                            this.freeze(params.row);
-					                        }
-					                    }
-					                },
-					                '冻结'
-					            ),
-					            h(
-					                'Button',
-					                {
-					                    props: {
-					                        type: 'warning',
-					                        size: 'small'
-					                    },
-					                    style: {
-					                        // width: "70px",
-					                        marginLeft: '10px'
-					                    },
-					                    on: {
-					                        click: () => {
-					                            this.unfreeze(params.row);
-					                        }
-					                    }
-					                },
-					                '解冻'
+					            	"Button",
+					            	{
+					            		props: {
+					            			type: "warning",
+					            			size: "small"
+					            		},
+					            		style: {
+					            			// width: "70px",
+					            			marginLeft: "10px"
+					            		},
+					            		on: {
+					            			click: () => {
+					            				let params={
+					            					id:ids
+					            				}
+					            				this.$router.push({
+					            					name:'admin-userManage-mingxi',
+					            					params:params,
+					            				});
+					            			}
+					            		}
+					            	},
+					            	"查看详情"
 					            )
 					        ]);
 					    }
@@ -305,6 +278,18 @@
 			}
 		},
 		methods: {
+			getTotal(){
+				if (confirm('是否确认结算') == true) {
+					axios.get('/api/manage/tLevel/getPromoters')
+						.then((response) => {
+							Util.success('结算成功');
+							console.log(response);
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+				}
+			},
 			// 用户列表的页码改变
 			yhlbmkPageChange(currentPage) {
 				this.yhlbmkGetList(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
@@ -325,8 +310,8 @@
 				}
 				console.log(params);
 				// 模拟请求接口返回的数据
-				let postData = this.$qs.stringify(params);
-				axios.post('/api/auction/integralDetail/sys/init', postData)
+				// let postData = this.$qs.stringify(params);
+				axios.get('/api/manage/tLevel/getPromotersLis', {params})
 					.then((response) => {
 						var res = response.data;
 						if (res.code == 200) {
