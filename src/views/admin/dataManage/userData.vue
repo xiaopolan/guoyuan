@@ -75,6 +75,11 @@
                                     >查询</Button>
                                 </div>
                             </Col>
+							<Col span="4">
+							    <select style="width:150px" name="public-choice" v-model="modelName" class="typeselect" @change="getmodel(1)">
+							    	<option :value="item.orderStatus" :key='item' v-for="item in statusList" >{{item.name}}</option>                                    
+							    </select>
+							</Col>
 							<Modal
 								v-model="yhlbmkModal"
 								title="物流信息"
@@ -143,7 +148,7 @@
 								:page-size="yhlbmktablePageData.pageSize"
 								:current="yhlbmktablePageData.currentPage"
 								show-elevator
-								@on-change="yhlbmkPageChange"
+								@on-change="yhlbmkPageChange1"
 							></Page>
 							<span>共&nbsp;{{yhlbmktablePageData.pages}}&nbsp;页</span>
 						</div>
@@ -159,6 +164,24 @@ export default {
     name: "userList",
     data() {
         return {
+			listobj:true,
+			modelName:100,
+			statusList:[{
+				orderStatus:100,
+				name:"全部订单"
+			},{
+				orderStatus:-1,
+				name:"取消"
+			},{
+				orderStatus:0,
+				name:"未支付"
+			},{
+				orderStatus:1,
+				name:"已支付"
+			},{
+				orderStatus:2,
+				name:"支付失败"
+			}],
 			wlgongsi:'',
 			wlid:'',
             yhtjtableData: [], // 用户统计表格数据
@@ -177,10 +200,15 @@ export default {
 					align: "center"
 				},
                 {
-                	title: "商品名称",
-                	key: "productName",
+                	title: "用户名",
+                	key: "userName",
                 	align: "center"
                 },
+				{
+					title: "商品名称",
+					key: "productName",
+					align: "center"
+				},
 				{
 					title: '创建时间',
 					key: 'createTime',
@@ -298,6 +326,34 @@ export default {
         yhlbmkPageChange(currentPage) {
             this.yhlbmkGetList(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
         },
+		yhlbmkPageChange1(currentPage) {
+		    this.getmodel(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
+		},
+		getmodel(currentPage){
+			this.listobj=false;
+			this.yhlbmktablePageData.currentPage=1;
+			var params
+			if(this.modelName==100){
+				params = {
+				    pageNum: currentPage, // 当前页码
+				    pageSize: 10, // 每页条数
+				};
+			}else{
+				params = {
+				    pageNum: currentPage, // 当前页码
+				    pageSize: 10, // 每页条数
+					orderStatus:this.modelName
+				};
+			}
+			axios.get('/api/manage/orders/getOrdersSuccess',{params})
+				.then( (response)=> {
+				var res = response.data;
+				this.yhlbmktablePageData=res.data;
+				})
+				.catch( (error)=> {
+				console.log(error);
+				});
+		},
         // 获取用户列表数据（调用接口的）---接口
         yhlbmkGetList(currentPage, isSearch) {
             // currentPage：当前页数   isLimitTime：是否限制时间段
@@ -306,7 +362,7 @@ export default {
             // 参数对象
             var params = {
                 pageNum: currentPage, // 当前页码
-                pageSize: 50, // 每页条数
+                pageSize: 10, // 每页条数
             };
             axios.get('/api/manage/orders/getOrders',{params})
             	.then( (response)=> {

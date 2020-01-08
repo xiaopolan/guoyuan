@@ -91,7 +91,7 @@ input::-webkit-input-placeholder{
 }
 .btm_xieyi{
 	height: 20px;
-	width: 60%;
+	width: 83%;
 	margin: 0 auto;
 	margin-top:10px;
 }
@@ -158,7 +158,7 @@ a{
 		<button class="reg_btn" @click="register">注册</button>
 		<div class="btm_xieyi">
 			<p class="radio_ck"></p>
-			<router-link to='/agreement' style="float: left;font-size: 12px;margin-left: 5px;color: #00B592;">已阅读并同意《神秘果商城用户协议》</router-link>
+			<a  style="float: left;font-size: 12px;margin-left: 5px;color: #00B592;">已阅读并同意<span @click="toyh">《用户隐私协议》</span><span @click="torj">《软件使用服务协议》</span></a>
 		</div>
 
 	</div>
@@ -205,6 +205,16 @@ a{
 				} else {
 					this.texterror = false
 				}
+			},
+			torj(){
+				this.$router.push({
+					path: '/agreement',
+				});
+			},
+			toyh(){
+				this.$router.push({
+					path: '/guide',
+				});
 			},
 			changepwd() {
 				if (this.password == '' || !(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/.test(this.password))) {

@@ -91,25 +91,25 @@
 					},
 					{
 						title: "用户名称",
-						key: "nickName",
+						key: "userName",
 						align: "center"
 					},
 					{
-						title: "城市",
-						key: "city",
+						title: "地址",
+						key: "address",
 						align: "center"
 					},
 					{
-						title: "省份",
-						key: "province",
+						title: "备注",
+						key: "remark",
 						align: "center"
 					},
 					{
 						title: "性别",
-						key: "gender",
+						key: "sex",
 						align: "center",
 						render: (h, params) => {
-							let text = params.row.gender
+							let text = params.row.sex
 							if (text == 0) {
 								return h('div', '未知')
 							}
@@ -136,12 +136,12 @@
 					},
 					{
 						title: "电话号码",
-						key: "mobile",
+						key: "phone",
 						align: "center"
 					},
 					{
 						title: "创建时间",
-						key: "ctime",
+						key: "createTime",
 						align: "center"
 					},
 					{

@@ -182,12 +182,17 @@
 				// 用户列表表格的标题行数据（列属性名称）
 				yhlbmkCols: [{
 						title: "用户名称",
-						key: "nickName",
+						key: "userName",
 						align: "center"
 					},
 					{
 						title: "推广人数",
 						key: "countNum",
+						align: "center"
+					},
+					{
+						title: "手机号",
+						key: "phone",
 						align: "center"
 					},
 					{
@@ -211,7 +216,7 @@
 					    width: 150,
 					    align: 'center',
 					    render: (h, params) => {
-							let ids=params.row.id
+							let ids=params.row.userId
 					        return h('div', [
 					            h(
 					            	"Button",

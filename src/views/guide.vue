@@ -1,340 +1,301 @@
 <!-- 登录页 -->
 <style scoped>
-	body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	body,
+	div,
+	dl,
+	dt,
+	dd,
+	ul,
+	ol,
+	li,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	pre,
+	code,
+	form,
+	fieldset,
+	legend,
+	input,
+	divarea,
+	p,
+	blockquote,
+	th,
+	td,
+	hr,
+	button,
+	article,
+	aside,
+	details,
+	figcaption,
+	figure,
+	footer,
+	header,
+	hgroup,
+	menu,
+	nav,
+	section {
 		margin: 0;
 		padding: 0;
 	}
-	.vipBox{
+	
+	html,
+	body {
 		width: 100%;
 		height: 100%;
-		background: #FFFFFF;
 	}
-	.vipdetail{
-		padding:15px 10px 20px 10px;
-	}
-	.vipline{
-		height: 24px;
-		width: 231px;
-		background: url(../assets/img/vipline.png) no-repeat no-repeat;
-		background-size: 100% 4px;
-		margin: 10px auto;
-	}
-	.viptext{
-		text-align: center;
-		font-size:14px;
-		font-family:MicrosoftYaHei;
-		color:rgba(196,160,110,1);
-		line-height:2px;
-	}
-	.viptextd{
-		font-size:14px;
-		font-family:MicrosoftYaHei;
-		color:rgba(51,51,51,1);
-		line-height:20px;
-		margin-bottom: 10px;
-		font-weight: 500;
-		text-indent: -14px;
-		margin-left: 16px;
-	}
-	.vipfenge{
-		height: 5px;
+	
+	/* 手机端CSS代码 */
+	body {
 		width: 100%;
-		background:rgba(196,160,110,0.14);
+		height: 100%;
 	}
-	.vipdetail2{
+	.title{
+		width: 100%;
 		height: auto;
-		padding:15px 15px 20px 15px;
-	}
-	.viptable{
-		/* border: 1px solid #eee; */
-		border-collapse: collapse;
-		width: 100%;
-		font-size: 10px;
+		font-size:16px;
+		font-family:Microsoft YaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+		line-height:22px;
 		text-align: center;
-		word-break:break-all; word-wrap:break-word; table-layout:fixed; 
-		color:rgba(102,102,102,1);
+		padding: 15px 0;
 	}
-	td{
-		border: 1px solid rgba(238,238,238,1);
+	.tabtitle{
+		font-size:14px;
+		font-family:Microsoft YaHei;
+		font-weight:bold;
+		color:rgba(51,51,51,1);
+		line-height:26px;
+		margin-top: 12px;
 	}
-		
-	th{
-		
-		border: 1px solid rgba(238,238,238,1);
-	}
-	.colortd{
-		background:rgba(246,246,246,1);
-	}
-	.tabletd{
-		width: 16%;
-		height: 40px;
-	}
-	.firsttd{
-		background:rgba(246,246,246,1);
-		border: 1px solid rgba(238,238,238,1);
-		font-weight: bold;
-	}
-	.tiplog{
-		font-size:12px;
-		font-family:PingFang SC;
-		font-weight:500;
-		color:rgba(153,153,153,1);
-		line-height:21px;
-		margin-top: 15px;
-	}
-	.nowtext{
+	.bodycont{
+		width: 95%;
+		height: auto;
 		font-size:12px;
 		font-family:Microsoft YaHei;
 		font-weight:400;
-		color:rgba(172,134,81,1);
-		position: absolute;
-		top: 132px;
-		left: 20px;
+		color:rgba(102,102,102,1);
+		line-height:22px;
+		margin: 0 auto;
 	}
-	.artctext{
-		font-size:14px;
-		font-family:PingFang SC;
-		font-weight:500;
-		color:rgba(51,51,51,1);
-		line-height:21px;
-		margin-top: 10px;
-	}
-	ul li {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-	.tab-tilte{
+	.xieyitop{
 		width: 100%;
-		height: 45px;
-	}
-	.tab-tilte li{
-		float: left;
-		width: 33.3%;
+		height: 25px;
+		line-height: 25px;
 		text-align: center;
-		height: 45px;
-		font-size: 14px;
-		line-height: 45px;
-		color: #999999;
-		cursor: pointer;
-		position: relative;
-	}
- /* 点击对应的标题添加对应的背景颜色 */
-	.tab-tilte .active{
-		background:rgba(255,255,255,1);
-		color: #333333;
+		font-size: 15px;
 		font-weight: bold;
+	}
+	.title{
 		height: 45px;
+		font-weight: 500;
+		line-height: 45px;
+		font-size: 15px;
+		color: #333333;
 	}
-	.tab-tilte .active:after{
-		content: '';
-		height: 2px;
-		position: absolute;
-		top: 35px;
-		left: 54px;
-		width: 17px;
-		border-top: 2px solid #ED3033;
-	}
-	.fgline{
-		background: #eee;
-		height: 10px;
-		width: 100%;
-	}
-	.buy1{
-		height: 260px;
-		width: 329px;
-		background: url(../assets/img/buy1.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 29px auto;
-	}
-	.buy2{
-		height: 260px;
-		width: 329px;
-		background: url(../assets/img/buy2.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 11px auto;
-	}
-	.buy3{
-		height: 229px;
-		width: 329px;
-		background: url(../assets/img/buy3.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 11px auto;
-	}
-	.sell1{
-		height: 256px;
-		width: 330px;
-		background: url(../assets/img/sell1.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 29px auto;
-	}
-	.sell2{
-		height: 266px;
-		width: 329px;
-		background: url(../assets/img/sell2.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 11px auto;
-	}
-	.sell3{
-		height: 230px;
-		width: 330px;
-		background: url(../assets/img/sell3.png) no-repeat no-repeat;
-		background-size: 100% 100%;
-		margin: 11px auto;
+	.bos{
+		padding: 20px;
+		background: #FFFFFF;
 	}
 </style>
+
 <template>
-    <div class="vipBox">
-		<ul class="tab-tilte">
-			<li @click="cur=0" :class="{active:cur==0}">交易指南</li>
-			<li @click="cur=1" :class="{active:cur==1}">购买路径图</li>
-			<li @click="cur=2" :class="{active:cur==2}">出售路径图</li>
-		</ul>
-		<div class="fgline"></div>
-		<div class="tab-content">
-			<div v-show="cur==0">
-				<div class='vipdetail'>
-					<div class="artctext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">ARTC (ART CURRENCY)</span> 是由杭州幻世电子商务 有限公司限量发行的一款平台通证，在小牛趣拍内进行是由杭州幻世电子商务 有限公司限量发行的一款平台通证，在小牛趣拍内进行 交易或完成任务可获得，持有数量影响小牛趣拍用户等 级，可用于小牛趣拍内的交易与抽奖活动。</div>
-					<div class="artctext">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-weight: bold;">ARTC</span>可通过完成新手任务，日常任务和打赏获得， 等级在V1及以上用户还可以通过购买获得。</div>
-					<ol style="margin-top: 19px;">
-						<li class="viptextd">1. 当前留存ARTC影响用户等级、等级越高权益越大。</li>
-						<li class="viptextd">2. 用户等级由系统自动判定、无需申请。</li>
-					</ol>
-				</div>
-				<div class='vipdetail2'>
-					<div class="vipline">
-						<p class="viptext">会员权益体系</p>
-					</div>
-					 <table class="viptable" >           
-						<tr v-for="(item,index) in headerList" :key="index">
-							<td class="colortd" style="width: 22%">{{item.value}}</td>
-							<th class="tabletd" v-if='index==0' v-for="(items,indexs) in bodyList1" :key="indexs">V{{items.grade}}</th>
-							<td class="tabletd" v-if='index==1' v-for="(items,indexs) in bodyList1" :key="indexs">
-								<div>{{items.countNum}}</div>
-							</td>
-							<td class="tabletd" v-if='index==2' v-for="(items,indexs) in bodyList1" :key="indexs">{{items.integralScale}}</td>
-							<td class="tabletd" v-if='index==3' v-for="(items,indexs) in bodyList1" :key="indexs">
-								<div v-if="indexs==0">/</div>
-								<div v-else>{{items.serverCharge*1000/10}}%</div>
-							</td>
-							<td class="tabletd" v-if='index==4' v-for="(items,indexs) in bodyList1" :key="indexs">
-								<div v-if="indexs==0">/</div>
-								<div v-else-if="indexs==1">500</div>
-								<div v-else>{{items.countNum*jflimit}}</div>
-							</td>
-						</tr>
-				    </table>
-					<div class="tiplog">备注：自由交易下限为500ARTC。</div>
-				</div>
-			</div>
-			<div v-show="cur==1">
-				<div class="buy1"></div>
-				<div class="buy2"></div>
-				<div class="buy3"></div>
-			</div>
-			<div v-show="cur==2">
-				<div class="sell1"></div>
-				<div class="sell2"></div>
-				<div class="sell3"></div>
-			</div>
-		</div>
-		
+    <!--pages/rjxieyi/rjxieyi.wxml-->
+    <div class="bos">
+    	<div class="xieyi">
+    		<div class="xieyitop">用户隐私服务协议</div>
+    		<div>
+    			欢迎您来到神秘果商城。
+    			请您仔细阅读以下条款，当您注册成功，对神秘果商城进行下载、安装以及通过各类方式直接或间接使用神秘果商城服务和数据的行为，均意味着您（即“用户”）完全接受本协议项下的全部条款。
+    			本协议是您与杭州幻世电子商务有限公司及其关联公司（下称“应用服务提供者”）之间关于使用其提供的应用服务之间签署的正式的、完整的协议。
+    
+    		</div>
+    			<span class="title">一、【协议范围】</span>
+    			<div>
+    				1.1 【协议适用范围】
+    				本协议是您与应用服务提供者之间关于您下载、安装、使用、复制本应用，以及使用应用服务提供者相关服务所订立的协议。
+    				1.2 【协议完整性】
+    				本协议内容同时包括应用服务提供者可能不断发布的关于本服务的相关协议、业务规则等内容。上述内容一经正式发布，即为本协议不可分割的组成部分，您同样应当遵守。
+    			</div>
+    			<span class="title">二、【关于本服务】</span>
+    			<div>
+    				2.1 【本服务的内容】
+    				本服务内容是指应用服务提供者向用户提供的平台产品有关的移动互联网应用工具（以下简称本协议），包括但不限于向用户提供违章查询与推送、违章信息提示、互动平台、信息与资料共享等等，以及平台不定期更新的其他服务（以下简称“本服务”）。
+    				2.2 【本服务的形式】
+    				2.2.1 您使用本服务后期需要下载应用服务提供者的神秘果商城客户端应用，对于这些应用，应用服务提供者给予您一项个人的、不可转让及非排他性的许可。您仅可为访问或使用本服务的目的而使用这些应用及服务。
+    				2.2.2 本服务中应用服务先以小程序提供服务，后续将提供者神秘果商城客户端应用提供包括但不限于ios、android等多个应用版本，用户必须选择与所安装手机相匹配的应用版本。
+    				2.3 【本服务许可的范围】
+    				2.3.1 应用服务提供者给予您一项个人的、不可转让及非排他性的许可，用以使用。您可以为非商业目的在单一台终端设备上安装、使用、显示、运行本应用。
+    				2.3.2 您可以为使用本应用及服务的目的复制本应用的一个副本，仅用作备份。备份副本必须包含原应用中含有的所有著作权信息。
+    				2.3.3 本条及本协议其他条款未明示授权的其他一切权利仍由应用服务提供者保留，您在行使这些权利时须另外取得应用服务提供者的书面许可。应用服务提供者如果未行使前述任何权利，并不构成对该权利的放弃。
+    
+    			</div>
+    			<span class="title">三、【应用的获取】</span>
+    			<div>
+    				3.1 您可以直接从应用服务提供者的网站上获取本应用，也可以从得到应用服务提供者授权的第三方获取。
+    				3.2 如果您从未经应用服务提供者授权的第三方获取本应用或与本应用名称相同的安装程序，应用服务提供者无法保证该应用能够正常使用，并对因此给您造成的损失不予负责。
+    
+    			</div>
+    			<span class="title">四、【应用的安装与卸载】</span>
+    			<div>
+    				4.1 应用服务提供者可能为不同的终端设备开发了不同的应用版本，您应当根据实际情况选择下载合适的版本进行安装。
+    				4.2 下载安装程序后，您需要按照该程序提示的步骤正确安装。
+    				4.3 为提供更加优质、安全的服务，在本应用安装时应用服务提供者可能推荐您安装其他应用，您可以选择安装或不安装。
+    				4.4 如果您不再需要使用本应用或者需要安装新版应用，可以自行卸载。如果您愿意帮助应用服务提供者改进产品服务，请告知卸载的原因。
+    
+    			</div>
+    			<span class="title">五、【应用的更新】</span>
+    			<div>
+    				5.1 为了改善用户体验、完善服务内容，应用服务提供者将不断努力开发新的服务，并为您不时提供应用更新（这些更新可能会采取应用替换、修改、功能强化、版本升级等形式）。
+    				5.2 为了保证本应用及服务的安全性和功能的一致性，应用服务提供者有权不经向您特别通知而对应用进行更新，或者对应用的部分功能效果进行改变或限制。
+    				5.3 本应用新版本发布后，旧版本的应用可能无法使用。应用服务提供者不保证旧版本应用继续可用及相应的客户服务，请您随时核对并下载最新版本。
+    				用户隐私政策
+    
+    			</div>
+    			<span class="title">六、【用户个人信息保护】</span>
+    			<div>
+    				6.1 保护用户个人信息是应用服务提供者的一项基本原则，应用服务提供者将会采取合理的措施保护用户的个人信息。除法律法规规定的情形外，未经用户许可应用服务提供者不会向第三方公开、透露用户个人信息。应用服务提供者对相关信息采用专业加密存储与传输方式，保障用户个人信息的安全。
+    				6.2 一般情况下，您可随时浏览、修改自己提交的信息，但出于安全性和身份识别的考虑，您可能无法修改注册时提供的初始注册信息及其他验证信息。
+    				6.3 应用服务提供者将运用各种安全技术和程序建立完善的管理制度来保护您的个人信息，以免遭受未经授权的访问、使用或披露。
+    				6.4 未经您的同意，应用服务提供者不会向应用服务提供者以外的无关的公司、组织和个人披露您的个人信息，但法律法规另有规定的除外。
+    				6.5 应用服务提供者非常重视对未成年人个人信息的保护。若您是18周岁以下的未成年人，在使用应用服务提供者的服务前，应事先取得您家长或法定监护人的书面同意。
+    
+    			</div>
+    			<span class="title">七、【权利义务】</span>
+    			<div>
+    			7.1 【帐号使用规范】
+    			7.1.1 您在使用本服务前，可能需要注册一个神秘果商城帐号。
+    			7.1.2 神秘果商城帐号的所有权归应用服务提供者公司所有，用户完成申请注册手续后，仅获得神秘果商城帐号的使用权，且该使用权仅属于初始申请注册人。同时，初始申请注册人不得赠与、借用、租用、转让或售卖神秘果商城帐号或者以其他方式许可非初始申请注册人使用神秘果商城帐号。非初始申请注册人不得通过受赠、继承、承租、受让或者其他任何方式使用神秘果商城账号。
+    			7.1.3 用户有责任妥善保管注册帐户信息及帐户密码的安全，用户需要对注册帐户以及密码下的行为承担法律责任。用户同意在任何情况下不向他人透露帐户及密码信息。当在您怀疑他人在使用您的帐号时，您应立即通知应用服务提供者公司。
+    			7.1.4 用户注册神秘果商城帐号后如果长期不登录该帐号，应用服务提供者有权回收该帐号，以免造成资源浪费，由此带来的任何损失均由用户自行承担。
+    			7.2 【用户注意事项】
+    			7.2.1 您理解并同意：为了向您提供有效的服务，本应用会利用您移动通讯终端的处理器和带宽等资源。本应用使用过程中可能产生数据流量的费用，用户需自行向运营商了解相关资费信息，并自行承担相关费用。
+    			7.2.2 您理解并同意：本应用的某些功能可能会让第三方知晓用户的信息，例如：用户的神秘果商城好友可以查询用户头像、名字、神秘果商城号或找吧发布的内容等可公开的个人资料。
+    			7.2.3 您在使用本应用某一特定服务时，该服务可能会另有单独的协议、相关业务规则等（以下统称为“单独协议”），您在使用该项服务前请阅读并同意相关的单独协议。
+    			7.2.4 您理解并同意应用服务提供者将会尽其商业上的合理努力保障您在本应用及服务中的数据存储安全，但是，应用服务提供者并不能就此提供完全保证，包括但不限于以下情形：
+    			7.2.4.1 应用服务提供者不对您在本应用及服务中相关数据的删除或储存失败负责；
+    			7.2.4.2 应用服务提供者有权根据实际情况自行决定单个用户在本应用及服务中数据的最长储存期限，并在服务器上为其分配数据最大存储空间等。您可根据自己的需要自行备份本应用及服务中的相关数据；
+    			7.2.4.3 如果您停止使用本应用及服务或服务被终止或取消，应用服务提供者可以从服务器上永久地删除您的数据。服务停止、终止或取消后，应用服务提供者没有义务向您返还任何数据。
+    			7.2.5 用户在使用本应用及服务时，须自行承担如下来自应用服务提供者不可掌控的风险内容，包括但不限于：
+    			7.2.5.1 由于不可抗拒因素可能引起的个人信息丢失、泄漏等风险；
+    			7.2.5.2 用户必须选择与所安装手机相匹配的应用版本，否则，由于应用与手机型号不相匹配所导致的任何问题或损害，均由用户自行承担；
+    			7.2.5.3 用户在使用本应用访问第三方网站时，因第三方网站及相关内容所可能导致的风险，由用户自行承担；
+    			7.2.5.4 用户发布的内容被他人转发、分享、复制，因此等传播可能带来的风险和责任；
+    			7.2.5.5 由于无线网络信号不稳定、无线网络带宽小等原因，所引起的应用服务提供者登录神秘果商城失败、资料同步不完整、页面打开速度慢等风险。
+    			7.3 【第三方产品和服务】
+    			7.3.1 您在使用本应用第三方提供的产品或服务时，除遵守本协议约定外，还应遵守第三方的用户协议。应用服务提供者和第三方对可能出现的纠纷在法律规定和约定的范围内各自承担责任。
+    			7.3.2 因用户使用本应用或要求应用服务提供者提供特定服务时，本应用可能会调用第三方系统或者通过第三方支持用户的使用或访问，使用或访问的结果由该第三方提供（包括但不限于第三方通过神秘果商城公众帐号提供的服务，或通过开放平台接入的内容等），应用服务提供者不保证通过第三方提供服务及内容的安全性、准确性、有效性及其他不确定的风险，由此若引发的任何争议及损害，与应用服务提供者无关，应用服务提供者不承担任何责任。
+    			7.3.3 特别的提醒，您在参加第三方组织的聚会、参观活动、户外互动时，您同意并理解您已充分知晓该等活动的性质及法律后果，并自愿或已经与该第三方达成了责任承担的方式，应用服务提供者不对该等活动承担任何保证或连带责任。
+    			7.4【数据收集与利用】
+    			7.4.1 您理解并同意，为了改善用户体验，应用服务提供者可能会收集、存储与使用您使用本应用的数据，包括但不限于设备信息、使用日志、查询记录及结果等数据，应用服务提供者无需向您及任何第三方支付任何费用或经其许可。
+    			7.4.2 您在使用神秘果商城等服务中提交的数据或信息（包括但不限于文字、图片、录音、视频等），无论是否构成独立的著作权，您在此特别授权应用服务提供者可以无偿的、可转授权的商业或非商业性使用。
+    
+    			</div>
+    			<span class="title">八、【用户行为规范】</span>
+    			<div>
+    			8.1 【信息内容规范】
+    			8.1.1 本条所述信息内容是指用户使用本应用及服务过程中所制作、复制、发布、传播的任何内容，包括但不限于神秘果商城帐号头像、名字、用户说明等注册信息，或文字、语音、图片等发送、回复、公众号图文和相关链接页面，以及其他使用神秘果商城帐号或本应用及服务所产生的内容。
+    			8.1.2 您理解并同意，神秘果商城一直致力于为用户提供文明健康、规范有序的网络环境，您不得利用神秘果商城帐号或本应用及服务制作、复制、发布、传播如下干扰神秘果商城正常运营，以及侵犯其他用户或第三方合法权益的内容，包括但不限于：
+    			8.1.2.1 发布、传送、传播、储存违反国家法律法规禁止的内容：
+    			（1）违反宪法确定的基本原则的；
+    			（2）危害国家安全，泄露国家秘密，颠覆国家政权，破坏国家统一的；
+    			（3）损害国家荣誉和利益的；
+    			（4）煽动民族仇恨、民族歧视，破坏民族团结的；
+    			（5）破坏国家宗教政策，宣扬邪教和封建迷信的；
+    			（6）散布谣言，扰乱社会秩序，破坏社会稳定的；
+    			（7）散布淫秽、色情、赌博、暴力、恐怖或者教唆犯罪的；
+    			（8）侮辱或者诽谤他人，侵害他人合法权益的；
+    			（9）煽动非法集会、结社、游行、示威、聚众扰乱社会秩序；
+    			（10）以非法民间组织名义活动的；
+    			（11）含有法律、行政法规禁止的其他内容的。
+    			8.1.2.2 发布、传送、传播、储存侵害他人名誉权、肖像权、知识产权、商业秘密等合法权利的内容；
+    			8.1.2.3 涉及他人隐私、个人信息或资料的；
+    			8.1.2.4 发表、传送、传播骚扰、广告信息及垃圾信息或含有任何性或性暗示的；
+    			8.1.2.5 其他违反法律法规、政策及公序良俗、社会公德或干扰神秘果商城平台正常运营和侵犯其他用户或第三方合法权益内容的信息。
+    			8.2 【应用使用规范】
+    			除非法律允许或应用服务提供者书面许可，您使用本应用过程中不得从事下列行为：
+    			8.2.1 删除本应用及其副本上关于著作权的信息；
+    			8.2.2 对本应用进行反向工程、反向汇编、反向编译，或者以其他方式尝试发现本应用的源代码；
+    			8.2.3 对应用服务提供者拥有知识产权的内容进行使用、出租、出借、复制、修改、链接、转载、汇编、发表、出版、建立镜像站点等；
+    			8.2.4 对本应用或者本应用运行过程中释放到任何终端内存中的数据、应用运行过程中客户端与服务器端的交互数据，以及本应用运行所必需的系统数据，进行复制、修改、增加、删除、挂接运行或创作任何衍生作品，形式包括但不限于使用插件、外挂或非应用服务提供者经授权的第三方工具/服务接入本应用和相关系统；
+    			8.2.5 通过修改或伪造应用运行中的指令、数据，增加、删减、变动应用的功能或运行效果，或者将用于上述用途的应用、方法进行运营或向公众传播，无论这些行为是否为商业目的；
+    			8.2.6 通过非应用服务提供者开发、授权的第三方应用、插件、外挂、系统，登录或使用应用服务提供者应用及服务，或制作、发布、传播上述工具；
+    			8.2.7 自行或者授权他人、第三方应用对本应用及其组件、模块、数据进行干扰；
+    			8.2.8 其他未经应用服务提供者明示授权的行为。
+    			8.3 【服务运营规范】
+    			除非法律允许或应用服务提供者书面许可，您使用本服务过程中不得从事下列行为：
+    			8.3.1 提交、发布虚假信息，或冒充、利用他人名义的；
+    			8.3.2 诱导其他用户点击链接页面或分享信息的；
+    			8.3.3 虚构事实、隐瞒真相以误导、欺骗他人的；
+    			8.3.4 侵害他人名誉权、肖像权、知识产权、商业秘密等合法权利的；
+    			8.3.5 未经应用服务提供者书面许可利用神秘果商城帐号和任何功能，以及第三方运营平台进行推广或互相推广的；
+    			8.3.6 利用神秘果商城帐号或本应用及服务从事任何违法犯罪活动的；
+    			8.3.7 制作、发布与以上行为相关的方法、工具，或对此类方法、工具进行运营或传播，无论这些行为是否为商业目的；
+    			8.3.8 其他违反法律法规规定、侵犯其他用户合法权益、干扰产品正常运营或应用服务提供者未明示授权的行为。
+    			8.4 【对自己行为负责】
+    			您充分了解并同意，您必须为自己注册帐号下的一切行为负责，包括您所发表的任何内容、参加的任何活动以及由此产生的任何后果。您应对本服务中的内容（无论是否由服务提供者提供）自行加以判断，并承担因使用内容而引起的所有风险，包括因对内容的正确性、完整性或实用性的依赖而产生的风险。应用服务提供者无法且不会对因前述风险而导致的任何损失或损害承担责任。
+    			8.5 【违约处理】
+    			8.5.1 如果应用服务提供者发现或收到他人举报或投诉用户违反本协议约定的，应用服务提供者有权不经通知随时对相关内容进行删除、屏蔽，并视行为情节对违规帐号处以包括但不限于警告、限制或禁止使用部分或全部功能、帐号封禁直至注销的处罚，并公告处理结果。
+    			8.5.2 您理解并同意，应用服务提供者有权依合理判断对违反有关法律法规或本协议规定的行为进行处罚，对违法违规的任何用户采取适当的法律行动，并依据法律法规保存有关信息向有关部门报告等，用户应独自承担由此而产生的一切法律责任。
+    			8.5.3 您理解并同意，因您违反本协议或相关服务条款的规定，导致或产生第三方主张的任何索赔、要求或损失，您应当独立承担责任；应用服务提供者因此遭受损失的，您也应当一并赔偿。
+    
+    			</div>
+    			<span class="title">九、【知识产权声明】</span>
+    			<div>
+    			9.1 应用服务提供者是本应用的知识产权权利人。本应用的一切著作权、商标权、专利权、商业秘密等知识产权，以及与本应用相关的所有信息内容（包括但不限于文字、图片、音频、视频、图表、界面设计、版面框架、有关数据或电子文档等）均受中华人民共和国法律法规和相应的国际条约保护，应用服务提供者享有上述知识产权，但相关权利人依照法律规定应享有的权利除外。
+    			9.2 未经应用服务提供者或相关权利人书面同意，您不得为任何商业或非商业目的自行或许可任何第三方实施、利用、转让上述知识产权。
+    
+    			</div>
+    			<span class="title">十、【终端安全责任】</span>
+    			<div>
+    				10.1 您理解并同意，本应用同大多数互联网应用一样，可能会受多种因素影响，包括但不限于用户原因、网络服务质量、社会环境等；也可能会受各种安全问题的侵扰，包括但不限于他人非法利用用户资料，进行现实中的骚扰；用户下载安装的其他应用或访问的其他网站中可能含有病毒、木马程序或其他恶意程序，威胁您的终端设备信息和数据安全，继而影响本应用的正常使用等。因此，您应加强信息安全及个人信息的保护意识，注意密码保护，以免遭受损失。
+    				10.2 您不得制作、发布、使用、传播用于窃取神秘果商城帐号及他人个人信息、财产的恶意程序。
+    				10.3 维护应用安全与正常使用是应用服务提供者和您的共同责任，应用服务提供者将按照行业标准合理审慎地采取必要技术措施保护您的终端设备信息和数据安全，但是您承认和同意应用服务提供者并不能就此提供完全保证。
+    				10.4 在任何情况下，您不应轻信借款、索要密码或其他涉及财产的网络信息。涉及财产操作的，请一定先核实对方身份，并请经常留意应用服务提供者有关防范诈骗犯罪的提示。
+    
+    			</div>
+    			<span class="title">十一、【平台产品】</span>
+    			<div>
+    			11.1 本应用平台产品前期以认养神秘果果树及购买神秘果周边产品为辅，认养神秘树及养护神秘果果树获得神秘珠，神秘果珠具体使用方法请参看平台产品详情；
+    			11.2本应用平台产品将根据平台后续后续发展情况而定，开发或植入新的产品，用户可根据自身情况而定是否参与。
+    
+    			</div>
+    			<span class="title">十二、【第三方应用或技术】</span>
+    			<div>
+    				12.1 本应用可能会使用第三方应用或技术（包括本应用可能使用的开源代码和公共领域代码等，下同），这种使用已经获得合法授权。
+    				12.2 本应用如果使用了第三方的应用或技术，应用服务提供者将按照相关法规或约定，对相关的协议或其他文件，可能通过本协议附件、在本应用安装包特定文件夹中打包等形式进行展示，它们可能会以“应用使用许可协议”、“授权协议”、“开源代码许可证”或其他形式来表达。前述通过各种形式展现的相关协议或其他文件，均是本协议不可分割的组成部分，与本协议具有同等的法律效力，您应当遵守这些要求。如果您没有遵守这些要求，该第三方或者国家机关可能会对您提起诉讼、罚款或采取其他制裁措施，并要求应用服务提供者给予协助，您应当自行承担法律责任。
+    				12.3 如因本应用使用的第三方应用或技术引发的任何纠纷，应由该第三方负责解决，应用服务提供者不承担任何责任。应用服务提供者不对第三方应用或技术提供客服支持，若您需要获取支持，请与第三方联系。
+    				12.4 特别的，本应用可能会使用第三方支付服务。本应用使用的支付服务均由独立第三方提供。您明确知悉并理解，本应用服务提供者不具有在线支付资质，您使用本应用采取的第三方支付服务，即视为您已接受该第三方支付服务的交易规则及用户协议，并，您清楚的理解使用该等第三方支付服务可能的交易风险及资金安全风险。
+    
+    			</div>
+    			<span class="title">十三、【其他】</span>
+    			<div>
+    				13.1 您使用本应用即视为您已阅读并同意受本协议的约束。应用服务提供者有权在必要时修改本协议条款。您可以在本应用的最新版本中查阅相关协议条款。本协议条款变更后，如果您继续使用本应用，即视为您已接受修改后的协议。如果您不接受修改后的协议，应当停止使用本应用。
+    				13.2 本协议签订地为中华人民共和国杭州市钱塘新区。
+    				13.3 本协议的成立、生效、履行、解释及纠纷解决，适用中华人民共和国大陆地区法律（不包括冲突法）。
+    				13.4 若您和应用服务提供者之间发生任何纠纷或争议，首先应友好协商解决；协商不成的，您同意将纠纷或争议提交本协议签订地有管辖权的人民法院管辖。
+    				13.5 本协议所有条款的标题仅为阅读方便，本身并无实际涵义，不能作为本协议涵义解释的依据。
+    				13.6 本协议条款无论因何种原因部分无效或不可执行，其余条款仍有效，对双方具有约束力。
+    
+    			</div>
+    			<div style="text-align: right;width: 100%;margin-top: 20rpx;margin-right: 20rpx;margin-bottom: 20rpx;">杭州幻世电子商务有限公司</div>
+    
+    	</div>
     </div>
+    
+    
 </template>
 <script>
-import axios from 'axios'
 export default {
     name: "result",
     components: {},
     data() {
         return {
-			cur:0,
-			headerList:[{
-				value:"会员等级"
-			},
-			{
-				value:"拥有ARTC数量"
-			},
-			{
-				value:"获取ARTC比例(打赏，竞拍)"
-			},
-			{
-				value:"寄售手续费"
-			},
-			{
-				value:"每日寄售上限"
-			},],
-			bodyList:[],
-			bodyList1:[],
-			jflimit:''
         };
     },
-    created() {
-		this.getlist();
-		this.getvip();
-		this.showlist();
-    },
-	mounted() {
-			
-	},
-    methods: {
-		showlist() {
-			axios
-				.post('/api/auction/operate/sys/init')
-				.then(response => {
-					var res = response.data;
-					var list20 = res.data.artc_transaction
-					this.jflimit = list20[0].cdVal || '';
-				})
-				.catch(error => {
-					console.log(error);
-				});
-		},
-		getlist(){
-			axios.get('/api/auction/member/sys/getList').then(response => {
-				var res = response.data;
-				if (res.code == 200) {
-					if (res.data == null) {
-						this.bodyList = [];
-					} else {
-						this.bodyList = res.data;
-						let bodylists=[]
-						// this.bodyList.shift()
-						for (let i=0;i<this.bodyList.length;i++) {
-							// if(i!=0){
-								bodylists.push(this.bodyList[i])
-							// }
-						}
-						this.bodyList1=bodylists
-					}
-				} else {
-					this.bodyList = [];
-				}
-			})
-			.catch(error => {
-					console.log(error);
-			});
-		},
-		getvip(){
-			axios.get('/api/auction/member/sys/getMemberByUserId',{params:{
-							 userId: '1001', 
-						 }}).then(response => {
-				var res = response.data;
-				if (res.code == 200) {
-					if (res.data == null) {
-						this.bodyList = [];
-					} else {
-						this.bodyList = res.data;
-					}
-				} else {
-					this.bodyList = [];
-				}
-			})
-			.catch(error => {
-					console.log(error);
-			});
-		}
-		
-    }
 };
 </script>

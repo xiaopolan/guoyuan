@@ -283,12 +283,12 @@ const routers = [{
     component: (res) => require(['./views/download.vue'], res)
 },
 {
-    path: '/judge',
+    path: '/bannerse',
     // 路由元信息
     meta: {
         title: '品鉴',
     },
-    component: (res) => require(['./views/judge.vue'], res)
+    component: (res) => require(['./views/bannerse.vue'], res)
 },
 {
     path: '/market',
