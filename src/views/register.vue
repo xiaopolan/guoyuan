@@ -262,7 +262,9 @@ a{
 								this.texterror5 = true
 								setTimeout(() => {
 									this.texterror5 = false
-									window.location.href=this.href
+									this.$router.push({
+										path: '/download',
+									});
 								}, 1000)
 							} else {
 								this.errmsg = res.msg + ",请重新注册!"

@@ -270,7 +270,7 @@ const routers = [{
     path: '/bannerfr',
     // 路由元信息
     meta: {
-        title: '会员权益',
+        title: 'banner详情',
     },
     component: (res) => require(['./views/bannerfr.vue'], res)
 },
@@ -278,7 +278,7 @@ const routers = [{
     path: '/download',
     // 路由元信息
     meta: {
-        title: '下载',
+        title: '下载页面',
     },
     component: (res) => require(['./views/download.vue'], res)
 },
@@ -286,7 +286,7 @@ const routers = [{
     path: '/bannerse',
     // 路由元信息
     meta: {
-        title: '品鉴',
+        title: '公告详情',
     },
     component: (res) => require(['./views/bannerse.vue'], res)
 },

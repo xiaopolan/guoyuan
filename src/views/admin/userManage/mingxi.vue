@@ -127,7 +127,7 @@
 					},
 					{
 						title: "购买数量",
-						key: "productNumbre",
+						key: "productNum",
 						align: "center"
 					},
 					{

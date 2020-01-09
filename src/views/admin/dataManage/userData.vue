@@ -418,6 +418,7 @@ export default {
 				orderId:this.orderId,
 				logisticsCompany:this.wlgongsi,
 				logisticsNumber:this.wlid,
+				logisticsCode:"SF"
 			};
 			let postData = this.$qs.stringify(json);
 			if(this.wlgongsi=='' || this.wlid==''){

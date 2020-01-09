@@ -201,6 +201,11 @@
 						align: "center"
 					},
 					{
+						title: "总数量",
+						key: "countNum",
+						align: "center"
+					},
+					{
 						title: "开始时间",
 						key: "startSettlingTime",
 						align: "center"

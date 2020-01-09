@@ -2,7 +2,7 @@
 <style scoped>
 	.backimg {
 		width: 100%;
-		height: 100vh;
+		height: auto;
 		background: url(../assets/img/wximg/bg.png) no-repeat no-repeat;
 		background-size: 100% 100%;
 		padding: 15px;
