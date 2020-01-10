@@ -265,27 +265,49 @@ export default {
 				{
 					title: "操作",
 					key: "status",
-					width: 90,
+					width: 180,
 					align: "center",
 					render: (h, params) => {
-						return h(
-							"Button", {
-								props: {
-									type: "info",
-									size: "small"
-								},
-								style: {
-									// width: "70px",
-									marginLeft: "10px"
-								},
-								on: {
-									click: () => {
-										this.goorder(params)
-									}
-								}
-							},
-							"添加物流"
-						)
+						return h('div', [
+						    h(
+						    	"Button", {
+						    		props: {
+						    			type: "info",
+						    			size: "small"
+						    		},
+						    		style: {
+						    			// width: "70px",
+						    			marginLeft: "10px"
+						    		},
+						    		on: {
+						    			click: () => {
+						    				this.goorder(params)
+						    			}
+						    		}
+						    	},
+						    	"添加物流"
+						    ),
+						    h(
+						        'Button',
+						        {
+						            props: {
+						                type: 'warning',
+						                size: 'small'
+						            },
+						            style: {
+						                // width: "70px",
+						                marginLeft: '10px'
+						            },
+						            on: {
+						                click: () => {
+						                    this.updataCC(params.row);
+						                }
+						            }
+						        },
+						        '已完成'
+						    )
+						]);
+						
 					}
 				}
             ],
@@ -322,6 +344,24 @@ export default {
 		
     },
     methods: {
+		updataCC(row){
+			var params = {
+			    orderId:row.orderId,
+			};
+			let postData = this.$qs.stringify(params);
+			axios.post('/api/manage/orders/updateOrderStatus',postData)
+				.then( (response)=> {
+					if (response.data.code == 200) {
+					    Util.success('修改成功');
+						this.yhlbmkGetList(1);
+					}else{
+						Util.error('修改失败,'+response.data.msg);
+					}
+				})
+				.catch( (error)=> {
+				console.log(error);
+				});
+		},
         // 用户列表的页码改变
         yhlbmkPageChange(currentPage) {
             this.yhlbmkGetList(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
