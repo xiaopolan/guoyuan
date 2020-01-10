@@ -136,7 +136,6 @@
                                 :page-size="yhlbmktablePageData.pageSize"
                                 :current="yhlbmktablePageData.currentPage"
                                 show-elevator
-								ref="pages"
                                 @on-change="yhlbmkPageChange"
                             ></Page>
                             <span>共&nbsp;{{yhlbmktablePageData.pages}}&nbsp;页</span>
@@ -148,6 +147,7 @@
 								:page-size="yhlbmktablePageData.pageSize"
 								:current="yhlbmktablePageData.currentPage"
 								show-elevator
+								ref="pages"
 								@on-change="yhlbmkPageChange1"
 							></Page>
 							<span>共&nbsp;{{yhlbmktablePageData.pages}}&nbsp;页</span>
@@ -181,6 +181,9 @@ export default {
 			},{
 				orderStatus:2,
 				name:"支付失败"
+			},{
+				orderStatus:3,
+				name:"签收成功"
 			}],
 			wlgongsi:'',
 			wlid:'',
@@ -289,27 +292,39 @@ export default {
 						    	},
 						    	"添加物流"
 						    ),
-						    h(
-						        'Button',
-						        {
-						            props: {
-						                type: 'warning',
-						                size: 'small'
-						            },
-						            style: {
-						                // width: "70px",
-						                marginLeft: '10px'
-						            },
-						            on: {
-						                click: () => {
-						                    this.updataCC(params.row);
-						                }
-						            }
-						        },
-						        '已完成'
-						    )
 						]);
 						
+					}
+				},
+				{
+					title: '修改状态',
+					key: 'action',
+					width: 150,
+					align: 'center',
+					render: (h, params) => {
+						if (params.row.orderStatus == 1) {
+							return h('div', [
+								h(
+								    'Button',
+								    {
+								        props: {
+								            type: 'warning',
+								            size: 'small'
+								        },
+								        style: {
+								            // width: "70px",
+								            marginLeft: '10px'
+								        },
+								        on: {
+								            click: () => {
+								                this.updataCC(params.row);
+								            }
+								        }
+								    },
+								    '已完成'
+								)
+							]);
+						}
 					}
 				}
             ],
@@ -347,33 +362,64 @@ export default {
     },
     methods: {
 		updataCC(row){
-			var params = {
-			    orderId:row.orderId,
-			};
-			let postData = this.$qs.stringify(params);
-			axios.post('/api/manage/orders/updateOrderStatus',postData)
-				.then( (response)=> {
-					if (response.data.code == 200) {
-					    Util.success('修改成功');
-						this.yhlbmkGetList(1);
-					}else{
-						Util.error('修改失败,'+response.data.msg);
-					}
-				})
-				.catch( (error)=> {
-				console.log(error);
-				});
+			if (confirm('是否确认将订单修改为已完成订单') == true) {
+				var params = {
+				    orderId:row.orderId,
+				};
+				let postData = this.$qs.stringify(params);
+				axios.post('/api/manage/orders/updateOrderStatus',postData)
+					.then( (response)=> {
+						if (response.data.code == 200) {
+						    Util.success('修改成功');
+							this.getmodels(this.yhlbmktablePageData.pageNum);
+							this.$nextTick(function() {
+								this.$refs['pages'].currentPage = this.yhlbmktablePageData.pageNum;
+							});
+						}else{
+							Util.error('修改失败,'+response.data.msg);
+						}
+					})
+					.catch( (error)=> {
+					console.log(error);
+					});
+			}
+			
 		},
         // 用户列表的页码改变
         yhlbmkPageChange(currentPage) {
             this.yhlbmkGetList(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
         },
 		yhlbmkPageChange1(currentPage) {
-		    this.getmodel(currentPage, this.yhlbmkIsSearch); // 获取用户列表数据
+		    this.getmodels(currentPage); // 获取用户列表数据
 		},
 		getmodel(currentPage){
 			this.listobj=false;
-			this.yhlbmktablePageData.currentPage=1;
+			this.$nextTick(function() {
+				this.$refs['pages'].currentPage = 1;
+			});
+			var params
+			if(this.modelName==100){
+				params = {
+				    pageNum: currentPage, // 当前页码
+				    pageSize: 10, // 每页条数
+				};
+			}else{
+				params = {
+				    pageNum: currentPage, // 当前页码
+				    pageSize: 10, // 每页条数
+					orderStatus:this.modelName
+				};
+			}
+			axios.get('/api/manage/orders/getOrdersSuccess',{params})
+				.then( (response)=> {
+				var res = response.data;
+				this.yhlbmktablePageData=res.data;
+				})
+				.catch( (error)=> {
+				console.log(error);
+				});
+		},
+		getmodels(currentPage){
 			var params
 			if(this.modelName==100){
 				params = {
@@ -472,7 +518,7 @@ export default {
 						Util.success("添加成功");
 						this.wlgongsi='';
 						this.wlid=""
-						this.yhlbmkGetList(this.yhlbmktablePageData.pageNum, this.yhlbmkIsSearch);
+						this.getmodels(this.yhlbmktablePageData.pageNum);
 						this.$nextTick(function() {
 							this.$refs['pages'].currentPage = this.yhlbmktablePageData.pageNum;
 						});
