@@ -254,11 +254,13 @@ export default {
 						if(text==0){
 							return h('div','待支付')
 						}else if(text==1){
-							return h('div','交易成功')
+							return h('div','已支付')
 						}else if(text==2){
 							return h('div','支付失败')
 						}else if(text==-1){
 							return h('div','支付取消')
+						}else if(text==3){
+							return h('div','已签收')
 						}
 					}
                 },
