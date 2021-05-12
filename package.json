@@ -28,7 +28,7 @@
     "babel-runtime": "^6.26.0",
     "less": "^3.0.4",
     "less-loader": "^4.1.0",
-    "swiper": "^4.5.0",
+    "swiper": "^6.5.1",
     "vue-template-compiler": "^2.5.17"
   },
   "postcss": {
